@@ -84,10 +84,13 @@ def formatting_func(example):
 model = AutoModelForCausalLM.from_pretrained(
     model_name,
     torch_dtype=torch.bfloat16,
+    #torch_dtype=torch.float16,  # Change to float16 to match training
     use_cache=False,
     trust_remote_code=True,
     device_map="auto"
 )
+
+#model.gradient_checkpointing_enable()
 
 # lora config and apply lora
 peft_config = LoraConfig(
@@ -111,7 +114,7 @@ training_config = SFTConfig(
     gradient_accumulation_steps=4,
     num_train_epochs=3,
     max_steps=-1,
-    max_seq_length=max_seq_length,
+    max_length=max_seq_length,
     learning_rate=2e-5,
     log_level="info",
     logging_steps = 100,
@@ -120,6 +123,8 @@ training_config = SFTConfig(
     save_strategy="steps",
     eval_strategy="epoch",
     seed=123,
+    #gradient_checkpointing=True , # saves memory at cost of speed
+    #fp16=True
     bf16=True
 )
 

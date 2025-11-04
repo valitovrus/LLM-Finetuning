@@ -3,9 +3,9 @@ dependencies:
   - python=3.12
   - pip
   - pip:
-    - transformers
+    - transformers==4.53.3
     - datasets
     - peft
-    - trl
+    - trl==0.20.0
     - accelerate
     - bitsandbytes

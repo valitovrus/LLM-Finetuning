@@ -6,6 +6,6 @@ dependencies:
     - azureml-core
     - azureml-defaults
     - azureml-inference-server-http
-    - transformers
+    - transformers==4.53.3
     - torch
     - peft
